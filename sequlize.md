@@ -35,6 +35,7 @@ sequelize
 ```
 #### 建立表模型
 ```js
+//user为表名
 const User = sequelize.define('user', {
   firstName: {
     type: Sequelize.STRING
@@ -105,8 +106,26 @@ Project.findAll({ offset: 8 })
 // 跳过5个实例，然后取5个
 Project.findAll({ offset: 5, limit: 5 })
 ```
-###Association - 关联
-1.BelongsTo
-2.HasOne
-3.HasMany
-4.BelongsToMany
+
+### Association - 关联
+
+- BelongsTo
+- HasOne
+- HasMany
+- BelongsToMany
+
+#### Source & Target
+当我们连接 Sequelize 中的两个模型时，我们可以将它们称为一对 source 和 target 模型。
+1.将 Player 作为 source 而 Team 作为 target
+```js
+Player.belongsTo(Team);
+//或
+Player.hasOne(Team);
+```
+2.将 Team 作为 source 而 Player 作为 target
+```js
+Team.belongsTo(Player);
+//Or
+Team.hasOne(Player);
+```
+HasOne 和 BelongsTo 将关联键插入到不同的模型中。 HasOne 在 target 模型中插入关联键，而 BelongsTo 将关联键插入到 source 模型中。(`被包裹的元素被插入关联键`)
